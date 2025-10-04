@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Portfolio Hendriana, Atlet dan Pelatih Taekwondo serta Mahasiswa Teknik Informatika." />
+  <title>Portfolio_Hendriana</title>
+  <style>
+    /* Reset dan font */
+    body, h1, h2, h3, p, ul {
+      margin: 0; padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #e2e8f0;
+      transition: background-color 0.5s, color 0.5s;
+    }
+    body {
+      background: #121212;
+      line-height: 1.6;
+      padding: 20px;
+      scroll-behavior: smooth;
+    }
+    a {
+      text-decoration: none;
+      color: #a3bffa;
+      transition: color 0.5s;
+    }
+    nav {
+      background: #1f2937;
+      box-shadow: 0 2px 5px rgba(255,255,255,0.1);
+      padding: 10px 20px;
+      border-radius: 10px;
+      margin-bottom: 40px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: background-color 0.5s;
+    }
+    nav ul {
+      list-style-type: none;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+    nav ul li {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    nav ul li a:hover {
+      background-color: #475569;
+      color: #e0e7ff;
+      border-radius: 5px;
+      padding: 5px 10px;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #1e293b;
+      box-shadow: 0 0 20px rgba(0,0,0,0.7);
+      border-radius: 10px;
+      padding: 30px;
+      transition: background-color 0.5s, box-shadow 0.5s;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    header h1 {
+      font-size: 3rem;
+      color: #a3bffa;
+      transition: color 0.5s;
+    }
+    header p {
+      font-size: 1.2rem;
+      color: #cbd5e1;
+      margin-top: 10px;
+      transition: color 0.5s;
+    }
+    .profile-img {
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      margin: 20px auto;
+      display: block;
+      box-shadow: 0 0 12px #a3bffaaa;
+      transition: box-shadow 0.5s;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    h2 {
+      color: #a3bffa;
+      border-bottom: 3px solid #818cf8;
+      display: inline-block;
+      margin-bottom: 15px;
+      padding-bottom: 5px;
+      transition: color 0.5s, border-color 0.5s;
+    }
+    p, li {
+      font-size: 1rem;
+      color: #cbd5e1;
+      transition: color 0.5s;
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    ul li {
+      background: #334155;
+      margin-bottom: 10px;
+      padding: 10px 15px;
+      border-radius: 8px;
+      box-shadow: inset 3px 3px 6px #1e293b;
+      transition: background-color 0.5s, box-shadow 0.5s, color 0.5s;
+    }
+    /* Proyek terpisah per row (flex column) */
+    .projects {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    .project-card {
+      background: #334155;
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 3px 3px 15px #1e293b;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s, color 0.5s;
+      cursor: default;
+      position: relative;
+      overflow: hidden;
+      color: #e2e8f0;
+      width: 100%;
+    }
+    .project-card:hover {
+      box-shadow: 10px 14px 30px #818cf8;
+      background: #475569;
+      transform: scale(1.02) translateY(-4px);
+      z-index: 10;
+    }
+    .project-card:hover .project-title {
+      color: #dbeafe;
+      text-shadow: 0 0 8px #a3bffa;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+    .project-title {
+      font-weight: 700;
+      color: #e2e8f0;
+      transition: color 0.5s;
+      margin-bottom: 8px;
+      cursor: default;
+    }
+    .project-desc {
+      opacity: 0.9;
+      transition: opacity 0.3s ease, color 0.5s;
+    }
+    .project-card:hover .project-desc {
+      opacity: 1;
+    }
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .images-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .images-container img {
+      width: calc(33.333% - 5.333px);
+      height: 120px;
+      border-radius: 8px;
+      object-fit: cover;
+      object-position: center center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .images-container img:hover {
+      transform: scale(1.1);
+    }
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #94a3b8;
+      margin-top: 30px;
+      transition: color 0.5s;
+    }
+    /* Style modal lightbox */
+    #lightbox-modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      outline: none;
+    }
+    #lightbox-modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #a3bffa;
+    }
+    #lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.3s;
+    }
+    #lightbox-close:hover {
+      color: #a3bffa;
+    }
+    /* Icon styles for contact */
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      font-size: 1rem;
+      color: #cbd5e1;
+      transition: color 0.3s;
+    }
+    .contact-item a {
+      color: #a3bffa;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .contact-item a:hover {
+      color: #dbeafe;
+    }
+    .contact-icon {
+      width: 20px;
+      height: 20px;
+      fill: #a3bffa;
+      transition: fill 0.3s;
+      flex-shrink: 0;
+    }
+    .contact-item a:hover .contact-icon {
+      fill: #dbeafe;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px 15px;
+        margin: 10px;
+        box-shadow: none;
+        border-radius: 8px;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+      .projects {
+        gap: 20px;
+      }
+      .profile-img {
+        width: 120px;
+        height: 120px;
+      }
+      nav ul {
+        flex-direction: column;
+        gap: 15px;
+        padding: 0;
+      }
+      nav ul li {
+        font-size: 1rem;
+        text-align: center;
+      }
+      nav {
+        padding: 10px 10px;
+        margin-bottom: 20px;
+      }
+      .images-container img {
+        width: calc(50% - 4px);
+        height: 100px;
+      }
+      .project-card {
+        padding: 15px 10px;
+      }
+      .contact-item {
+        font-size: 0.95rem;
+        gap: 6px;
+      }
+      .contact-icon {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  </style>
+</head>
+<body class="dark-mode">
+  <div class="container">
+    <header>
+      <img src="gambar/IMG-20250927-WA0007.JPG" alt="Foto Profil Hendriana" class="profile-img" />
+      <h1>Hendriana</h1>
+      <p>Atlet Taekwondo | Pelatih Taekwondo | Mahasiswa</p>
+    </header>
+
+    <section id="about">
+      <h2>Tentang Saya</h2>
+      <p>Saya adalah seorang mahasiswa Teknik Informatika yang sedang menempuh pendidikan dengan tekun dan semangat. Selain fokus pada dunia akademik dan teknologi, saya juga aktif sebagai atlet taekwondo, di mana saya berlatih dan berkompetisi untuk mengasah kemampuan fisik dan mental. Lebih dari itu, saya berbagi ilmu dan pengalaman saya sebagai pelatih taekwondo, membantu orang lain untuk berkembang dan mencapai potensi terbaik mereka. Di balik semua peran tersebut, saya bangga berasal dari kampung, yang membentuk karakter dan nilai-nilai kehidupan saya, seperti kerja keras, kekeluargaan, dan semangat pantang menyerah. Semua peran ini saling melengkapi dan membuat saya terus tumbuh menjadi pribadi yang lebih baik.</p>
+    </section>
+
+    <section id="projects">
+      <h2>Proyek Terbaru</h2>
+      <div class="projects">
+        <div class="project-card" tabindex="0" aria-label="Pengalaman Keorganisasian dan kepanitiaan">
+          <div class="project-title">PENGALAMAN KEORGANISASIAN/KEPANITIAAN</div>
+          <div class="project-desc">
+            <div class="images-container">
+              <img src="gambar/aksara.JPG" alt="Organisasi Aksara" />
+              <img src="gambar/mubes.JPG" alt="Musyawarah Besar Organisasi" />
+              <img src="gambar/pialapjbupati.jpg" alt="Piala Penghargaan Bupati" />
+              <img src="gambar/pilkeb.jpg" alt="Kegiatan Pemilihan Ketua" />
+              <img src="gambar/IMG-20251003-WA0021.jpg" alt="Kegiatan Organisasi 1" />
+              <img src="gambar/IMG-20251003-WA0022.jpg" alt="Kegiatan Organisasi 2" />
+            </div>
+            <p>Aktif di berbagai organisasi kampus yang meningkatkan keterampilan kepemimpinan dan kerjasama tim, ini hanya beberapa yang saya masukkan kedalam portfolio saya.</p>
+          </div>
+        </div>
+
+        <div class="project-card" tabindex="0" aria-label="Prestasi">
+          <div class="project-title">PRESTASI</div>
+          <div class="project-desc">
+            <div class="images-container">
+              <img src="gambar/medali.jpg" alt="Medali Prestasi Taekwondo" />
+              <img src="gambar/IMG-20250927-WA0080.jpg" alt="Penghargaan Juara 1" />
+              <img src="gambar/IMG-20250927-WA0083.jpg" alt="Penghargaan Juara 2" />
+              <img src="gambar/IMG-20250927-WA0079.jpg" alt="Penghargaan Juara 3" />
+              <img src="gambar/IMG-20250927-WA0063.jpg" alt="Penghargaan Juara 4" />
+              <img src="gambar/piala.jpg" alt="Piala Kejuaraan" />
+              <img src="gambar/student.jpg" alt="Foto Bersama Mahasiswa Berprestasi" />
+              <img src="gambar/itn.jpg" alt="Acara di ITN" />
+              <img src="gambar/bupati.jpg" alt="Foto Bersama Bupati" />
+            </div>
+            <p>Meraih beberapa penghargaan dalam event/kejuaraan TAEKWONDO dari tingkat kabupaten maupun nasional, dan ini hanya beberapa yang saya masukan kedalam portfolio saya.</p>
+          </div>
+        </div>
+
+        <div class="project-card" tabindex="0" aria-label="Sertifikasi dan Kepelatihan">
+          <div class="project-title">SERTIFIKASI & KEPELATIHAN</div>
+          <div class="project-desc">
+            <div class="images-container">
+              <img src="gambar/IMG-20251002-WA0030.jpg" alt="Sertifikat Pelatihan 1" />
+              <img src="gambar/IMG-20251002-WA0031.jpg" alt="Sertifikat Pelatihan 2" />
+              <img src="gambar/IMG-20251002-WA0042.jpg" alt="Sertifikat Pelatihan 3" />
+              <img src="gambar/IMG-20251003-WA0018.jpg" alt="Sertifikat Pelatihan 4" />
+              <img src="gambar/IMG-20251003-WA0019.jpg" alt="Sertifikat Pelatihan 5" />
+              <img src="gambar/IMG-20251002-WA0016.jpg" alt="Sertifikat Pelatihan 6" />
+              <img src="gambar/diklatpelatih.JPG" alt="Pelatihan Kepelatihan" />
+              <img src="gambar/Gambar WhatsApp 2025-10-04 pukul 11.27.42_59aabe42.jpg" alt="Dokumentasi Pelatihan 1" />
+              <img src="gambar/Gambar WhatsApp 2025-10-04 pukul 11.27.41_0f047738.jpg" alt="Dokumentasi Pelatihan 2" />
+            </div>
+            <p>Memiliki sertifikat pelatihan taekwondo dan beberapa kepelatihan lainnya, karena saya percaya sedikit bisa dan tau dari banyak hal itu tidak membuat kita rugi, tapi tetap harus ada 1 skill yang harus kita tekuni dan dalami.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Kontak</h2>
+      <div class="contact-item">
+        <svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M2 8.5v7a2.5 2.5 0 0 0 2.5 2.5h15a2.5 2.5 0 0 0 2.5-2.5v-7A2.5 2.5 0 0 0 19.5 6h-15A2.5 2.5 0 0 0 2 8.5zM20.5 8l-7.5 5-7.5-5V9l7.5 5 7.5-5V8z"/>
+        </svg>
+        Email: <a href="mailto:Hendriana689@gmail.com">Hendriana689@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M20.5 3.5a17.7 17.7 0 0 0-15 8.6c0 3 1.3 5.8 3.2 7.8l-1.7 5.1 5.2-1.7c1.5 1 3.1 1.7 4.9 1.7a17.7 17.7 0 0 0 15-8.6c.1-.3.3-.8.3-1.3 0-6.4-6.6-12-12-12zM17.4 15a1.1 1.1 0 0 1-1.6.3c-.3-.2-1-.6-2-1.3a7.93 7.93 0 0 1-2.6-3.3l-.6-1.3 2.1-2.1 1.5 1.4-.8 1a.69.69 0 0 0 0 .7c.1.2.2.3.4.5.2.2.4.3.5.4.2.1.4 0 .5 0a1.53 1.53 0 0 0 1-.5c.3-.4.6-1 1-1.3.2-.2.4-.2.6-.1a.47.47 0 0 1 .3.3c.1.3 0 .6-.1.9-.1.4-.9 1.6-1.1 1.8z"/>
+        </svg>
+        Instagram: <a href="https://www.instagram.com/attaa_hendriana?igsh=YTltaWM1M28wNXR2" target="_blank" rel="noopener noreferrer">@attaa_hendriana</a>
+      </div>
+      <div class="contact-item">
+        <svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M20.52 3.48A17.79 17.79 0 0 0 12 2C6.48 2 2 6.5 2 12c0 3.2 1.38 6.16 3.6 8.19l-1.45 4.38 4.48-1.4a9.78 9.78 0 0 0 4.4 1.1c5.52 0 10-4.5 10-10 0-1.9-.58-3.68-1.59-5.14zM12 18.32c-1.43 0-2.81-.47-3.89-1.32l-.28-.2-2.66.83.9-2.68-.19-.28A6.706 6.706 0 0 1 5.33 12c0-3.72 3.03-6.75 6.75-6.75 1.8 0 3.5.7 4.77 1.97a6.729 6.729 0 0 1 1.97 4.78c0 3.73-3.03 6.77-6.75 6.77zm3.77-5.32c-.2-.1-1.18-.58-1.36-.65-.18-.06-.31.1-.44.1-.12.18-.45.65-.55.78-.1.13-.2.15-.39.05-.19-.1-.78-.29-1.48-.9-.55-.49-.92-1.1-1.03-1.29-.11-.18-.01-.28.09-.38.09-.09.2-.22.3-.33.1-.11.13-.19.2-.32.07-.13.04-.25-.02-.36-.06-.12-1.43-3.44-1.96-4.7-.52-1.22-1.05-1.05-1.44-1.07a1.22 1.22 0 0 0-.84.26c-.29.28-1.11 1.09-1.11 2.65 0 1.56 1.14 3.07 1.3 3.28.17.21 2.25 3.43 5.45 4.8.76.33 1.35.52 1.81.67.76.25 1.45.21 1.99.13.61-.1 1.86-.76 2.12-1.5.27-.75.27-1.39.19-1.52-.08-.13-.29-.2-.49-.29z"/>
+        </svg>
+        WhatsApp: <a href="https://wa.me/6283131625696" target="_blank" rel="noopener noreferrer">+62 831 3162 5696</a>
+      </div>
+    </section>
+
+    <footer>
+      &copy; 2025 Hendriana. Semua hak cipta dilindungi.
+    </footer>
+  </div>
+
+  <!-- Modal Lightbox -->
+  <div id="lightbox-modal" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="lightbox-close">
+    <span id="lightbox-close" role="button" aria-label="Tutup gambar">&times;</span>
+    <img id="lightbox-image" src="" alt="Gambar Besar" />
+  </div>
+
+  <script defer>
+    const projectImages = document.querySelectorAll('.project-card img');
+    const modal = document.getElementById('lightbox-modal');
+    const modalImg = document.getElementById('lightbox-image');
+    const modalClose = document.getElementById('lightbox-close');
+
+    projectImages.forEach(img => {
+      img.addEventListener('click', () => {
+        modal.style.display = 'flex';
+        modalImg.src = img.src;
+        modalImg.alt = img.alt;
+        modal.focus();
+      });
+      img.style.cursor = 'pointer';
+    });
+
+    modalClose.addEventListener('click', () => {
+      modal.style.display = 'none';
+      modalImg.src = '';
+      modalImg.alt = '';
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+        modalImg.src = '';
+        modalImg.alt = '';
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.style.display === 'flex') {
+        modal.style.display = 'none';
+        modalImg.src = '';
+        modalImg.alt = '';
+      }
+    });
+  </script>
+</body>
+</html>
